@@ -1,12 +1,13 @@
 class Client < ApplicationRecord
-  validates :client_name, :client_age, presence: true
-  validate :age_is_valid
-
+  validates_presence_of :client_name, presence: true
+  validate :valid_age
   private
 
-  def age_is_valid
-    if age < 18
-      puts "Cliente deve ser maior de idade!"
+  def valid_age
+    if client_age == nil
+      errors.add(:client_age, message: "can't be blank!")
+    elsif client_age < 18
+      errors.add(:client_age, message: "for Adults only!")
     end
   end
 end
