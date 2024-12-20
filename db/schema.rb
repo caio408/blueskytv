@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_20_000408) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_20_145414) do
   create_table "additional_services", force: :cascade do |t|
     t.string "service_name"
     t.float "service_value"
@@ -30,6 +30,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000408) do
     t.float "package_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "plans_id", null: false
+    t.integer "additional_services_id", null: false
+    t.index ["additional_services_id"], name: "index_packages_on_additional_services_id"
+    t.index ["plans_id"], name: "index_packages_on_plans_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -38,4 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "packages", "additional_services", column: "additional_services_id"
+  add_foreign_key "packages", "plans", column: "plans_id"
 end

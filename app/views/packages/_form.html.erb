@@ -17,8 +17,18 @@
   </div>
 
   <div>
+    <%= form.label :plan_name, style: "display: block" %>
+   <%= form.collection_select :plan_id, Plan.all, :id, :plan_name, prompt: "Select a one plan" %>
+  </div>
+
+  <div>
     <%= form.label :package_value, style: "display: block" %>
     <%= form.text_field :package_value %>
+  </div>
+
+  <div>
+    <%= form.label :service_name, style: "display: block" %>
+   <%= form.collection_select :additional_service_id, AdditionalService.all, :id, :service_name, prompt: "Select a one Additional Service" %>
   </div>
 
   <div>
